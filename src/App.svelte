@@ -4,10 +4,20 @@
   import routes from "./routes";
   import Header from "./components/Header.svelte";
   
+  const user = window.sessionStorage.getItem('user')
+  import Login from "./routes/Login.svelte";
 </script>
-<Header/>
+
+
 <div in:fade>
-  <Router {routes}/>
+{#if user}
+  <Header/>
+  <Router
+    {routes}
+    restoreScrollState={true} />
+{:else}
+  <Login />
+{/if}
 </div>
 
 <style lang="scss">
